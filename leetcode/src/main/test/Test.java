@@ -8,7 +8,7 @@ public class Test {
         System.out.println(head);
 
         System.out.println("==============================");
-        ListNode listNode = new Solution().swapPairs(head);
+        ListNode listNode = new Solution().swapPairsOfficial(head);
         System.out.println(listNode);
     }
 
@@ -17,7 +17,7 @@ public class Test {
 
         int count = firstNode.val;
         ListNode cur = firstNode;
-        while (count < 5) {
+        while (count < 7) {
             cur.next = new ListNode(++count);
             cur = cur.next;
         }
