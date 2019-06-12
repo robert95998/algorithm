@@ -21,7 +21,6 @@ public class Solution {
 
     public ListNode swapPairs(ListNode head) {
         ListNode newHead = head, cur;
-        ListNode left, right, prePair = head;
         int count = 0;
         while (head != null && head.next != null) {
             // -> 业务实现
