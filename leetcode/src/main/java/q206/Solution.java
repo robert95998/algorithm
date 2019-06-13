@@ -55,6 +55,23 @@ public class Solution {
         return pre;
     }
 
+    public ListNode reverseListIterable2(ListNode head) {
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            //记录下一个节点值
+            ListNode nextTemp = cur.next;
+
+            // -> 业务实现
+            cur.next = pre;
+            pre = cur;
+
+            // -> 循环的移动
+            cur = nextTemp;
+        }
+        return pre;
+    }
+
     /**
      * 递归实现
      * <ul>

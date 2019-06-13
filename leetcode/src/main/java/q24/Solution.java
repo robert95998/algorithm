@@ -76,4 +76,22 @@ public class Solution {
         }
         return head.next;
     }
+
+    /**
+     * 会形成循环链表，导致stackOverFlow
+     *
+     * @param head
+     * @return
+     */
+    public ListNode swapPairsError(ListNode head) {
+        while (head != null && head.next != null) {
+            // -> 业务实现
+            ListNode temp = head;
+            head = head.next;
+            head.next = temp;
+            // -> 循环的移动
+            head = head.next.next;//当前节点移动两个位置
+        }
+        return null;
+    }
 }
