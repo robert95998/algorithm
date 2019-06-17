@@ -8,7 +8,7 @@ public class Test {
         System.out.println(head);
 
         System.out.println("==============================");
-        ListNode listNode = new Solution().swapPairsError(head);
+        ListNode listNode = new Solution().swapPairsOfficial(head);
         System.out.println(listNode);
     }
 

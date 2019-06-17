@@ -36,6 +36,7 @@ public class Solution {
      *
      * @param head
      * @return
+     * @author wuang
      */
     public ListNode reverseListIterable(ListNode head) {
         if (head == null) {
@@ -46,7 +47,7 @@ public class Solution {
         while (head != null) {
             // -> 业务实现
             ListNode curNode = new ListNode(head.val);
-            add(curNode, pre);
+            curNode.next = pre;
             pre = curNode;//暂存上一个节点
 
             // -> 循环的移动
@@ -55,14 +56,21 @@ public class Solution {
         return pre;
     }
 
-    public ListNode reverseListIterable2(ListNode head) {
+    /**
+     * 真正的改造了原链表：是在原链表的基础上进行了改造；我上面的方法只是建立了一个新链表，原链表只是用来循环得到所有值；
+     * 相比而言，我的方法内存开销是更大的，空间复杂度更大，但是我少了一个空间指针cur
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseListIterableOfficial(ListNode head) {
         ListNode cur = head;
         ListNode pre = null;
         while (cur != null) {
             //记录下一个节点值
             ListNode nextTemp = cur.next;
 
-            // -> 业务实现
+            // -> 业务实现：将原链表进行反向指针
             cur.next = pre;
             pre = cur;
 
@@ -82,18 +90,8 @@ public class Solution {
      * @return
      */
     public ListNode reverseListRecursive(ListNode head) {
-
+        // TODO: 2019/6/13
         return null;
-    }
-
-    /**
-     * 将新节点newNode添加到原链表的头部
-     */
-    private static void add(ListNode newNode, ListNode old) {
-        if (newNode == null) {
-            return;
-        }
-        newNode.next = old;
     }
 }
 

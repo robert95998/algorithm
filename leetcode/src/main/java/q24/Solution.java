@@ -63,16 +63,26 @@ public class Solution {
         return  listNode;
     }
 
+    /**
+     * <ul>思想：
+     *     <li>虚拟节点对原链表保持引用</li>
+     *     <li>将pair的1节点取出后重新插入支持，，国，国，国，，忆寺大肱须在。，轧   国，册</li>
+     *     <li>每一对pair（如果存在）的两个节点同时对后续节点进行引用，保持了两个起始位置不同的相同链表</li>
+     * </ul>
+     * @param head
+     * @return
+     */
     public ListNode swapPairsOfficial(ListNode head) {
-        ListNode p1 = new ListNode(0);
+        ListNode p1 = new ListNode(0);//虚拟节点（因为头节点是要变动的，因为要交换嘛，所以搞个虚拟节点来指向原链表）
         p1.next = head;
-        head = p1;
+        head = p1;//head等于最初的p1，这样保持对头节点的引用；head.next就是原链表
         while(p1.next != null && p1.next.next != null){
-            ListNode p = p1.next;
-            p1.next = p1.next.next;
-            p.next = p1.next.next;
-            p1.next.next = p;
-            p1 = p;
+            ListNode p = p1.next;//将1节点从链表里单独摘出来，记下来（可以视为临时链表）
+            p1.next = p1.next.next;//将1节点（从原链表里）踢掉
+            p.next = p1.next.next;//摘出来的临时链表1指向3
+
+            p1.next.next = p;//原链表节点2指向临时链表（也可以理解为将1节点重新插入原链表，位置为2与3之间）
+            p1 = p;//p1指向新链表1节点，等于向前移动了两个位置
         }
         return head.next;
     }
