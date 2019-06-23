@@ -48,7 +48,7 @@ public class Solution {
      * @return
      */
     public boolean hasCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
+        HashSet<ListNode> set = new HashSet<>();
         while (head != null) {
             if (set.contains(head)) {
                 return true;
@@ -66,8 +66,9 @@ public class Solution {
         ListNode e = new ListNode(1);
         set.add(e);
         System.out.println(e.hashCode());
-        ListNode listNode = new ListNode(1);
-        System.out.println(listNode.hashCode());
-        System.out.println(set.contains(listNode));
+        ListNode e2 = new ListNode(1);
+        System.out.println(e2.hashCode());
+        System.out.println(set.contains(e2));
+        System.out.println(e.equals(e2));
     }
 }
