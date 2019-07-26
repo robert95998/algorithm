@@ -73,34 +73,33 @@ public class Solution {
         }
 
         int[] result = new int[nums.length - k + 1];
+        //滑动窗口，用于存放在nums的原始下标
         ArrayList<Integer> window = new ArrayList<>();
-        int curMaxIndex = 0;
         for (int i = 1; i <= nums.length; i++) {
             try {
-                int cur = nums[i - 1];
-                if (window.isEmpty()) {
-                    window.add(cur);
-                    continue;
-                }
-
-                if (i < k) {
-
-                }
-
-                //干掉比自己小的
-                ArrayList<Integer> windowCopy = new ArrayList<>(window);
-                for (int j = 0; j < windowCopy.size(); j++) {
-                    if (windowCopy.get(j) < cur) {
-                        window.remove(j);
+                if (!window.isEmpty()) {
+                    ArrayList<Integer> good = new ArrayList<>();
+                    for (int j = 0; j < window.size(); j++) {
+                        Integer index = window.get(j);
+                        //自然退休
+                        if (index < i - k) {
+                            continue;
+                        }
+                        //长江后浪推前浪
+                        if (nums[index] < nums[i - 1]) {
+                            continue;
+                        }
+                        good.add(index);
                     }
+                    window = good;
                 }
+
                 //自己入队
-                window.add(cur);
-                curMaxIndex = i;
+                window.add(i-1);
             } finally {
                 //滑动窗口工作后开始记录
                 if (i >= k) {
-                    result[i - k] = window.get(0);
+                    result[i - k] = nums[window.get(0)];
                 }
             }
         }
@@ -108,12 +107,8 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-
-        List<Integer> ints = Arrays.asList(1, 2, 3, 4, 5, 6, 1);
-        System.out.println(ints.lastIndexOf(1));
-
         int arr[] ={1,3,-1,-3,5,3,6,7};
-        int[] x = new Solution().maxSlidingWindow(arr, 3);
+        int[] x = new Solution().maxSlidingWindow2(arr, 3);
         for (int i : x) {
             System.out.println(i);
         }
