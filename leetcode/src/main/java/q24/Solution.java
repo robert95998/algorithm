@@ -66,7 +66,7 @@ public class Solution {
     /**
      * <ul>思想：
      *     <li>虚拟节点对原链表保持引用</li>
-     *     <li>将pair的1节点取出后重新插入支持，，国，国，国，，忆寺大肱须在。，轧   国，册</li>
+     *     <li>将pair的1节点取出后重新插入支持</li>
      *     <li>每一对pair（如果存在）的两个节点同时对后续节点进行引用，保持了两个起始位置不同的相同链表</li>
      * </ul>
      * @param head
@@ -85,6 +85,21 @@ public class Solution {
             p1 = p;//p1指向新链表1节点，等于向前移动了两个位置
         }
         return head.next;
+    }
+
+    public ListNode swapPairs2(ListNode head) {
+        ListNode temp = new ListNode(-1);
+        temp.next = head;
+        while(head.next != null && head.next.next != null){
+            ListNode node1 = head.next;
+            ListNode node2 = head.next.next;
+            node1.next = node2.next;
+            node2.next = node1;
+
+            temp.next = node2;
+            head = head.next.next;
+        }
+        return temp.next;
     }
 
     /**
