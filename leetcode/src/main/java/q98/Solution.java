@@ -62,10 +62,26 @@ public class Solution {
         List<Integer> result = new ArrayList<>();
         if (r == null) return result;
 
-        if (r.left != null) result.addAll(inorder(r.left));
+        result.addAll(inorder(r.left));
         result.add(r.val);
-        if (r.right != null) result.addAll(inorder(r.right));
+        result.addAll(inorder(r.right));
         return result;
+    }
+
+    // ==========================
+
+    public boolean isValidBST2(TreeNode root) {
+        return helper(root);
+    }
+
+    public static boolean helper(TreeNode r) {
+        if (r == null) return true;
+        if (!helper(r.left)) return false;
+//        if (r.val > r.left)
+
+        if (!helper(r.right)) return false;
+
+        return true;
     }
 
     public static void main(String[] args) {
