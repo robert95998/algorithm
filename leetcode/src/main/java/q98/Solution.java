@@ -74,14 +74,16 @@ public class Solution {
         return helper(root);
     }
 
-    public static boolean helper(TreeNode r) {
+    TreeNode prev = null;
+
+    public boolean helper(TreeNode r) {
         if (r == null) return true;
+
         if (!helper(r.left)) return false;
-//        if (r.val > r.left)
+        if (prev != null && r.val >= prev.val) return false;
+        prev = r;
 
-        if (!helper(r.right)) return false;
-
-        return true;
+        return helper(r.right);
     }
 
     public static void main(String[] args) {
@@ -97,6 +99,6 @@ public class Solution {
 
         System.out.println(inorder(root));
 
-        System.out.println(new Solution().isValidBST(root));
+        System.out.println(new Solution().isValidBST2(root));
     }
 }
