@@ -2,6 +2,7 @@ package q98;
 
 
 import base.TreeNode;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,9 @@ import java.util.stream.Collectors;
  * 示例 2:
  * <p>
  * 输入:
- * 5
- * / \
- * 1   4
+     * 5
+     * / \
+     * 1   4
  *      / \
  *     3   6
  * 输出: false
@@ -40,7 +41,8 @@ import java.util.stream.Collectors;
  */
 public class Solution {
     /**
-     * 二叉搜索树（压扁排成一条直线）一定是单调递增的，即不存在重复元素；
+     * 二叉搜索树（压扁排成一条直线）一定是单调递增的，即不存在重复元素并且是递增的；
+     *
      * @param root
      * @return
      */
@@ -76,17 +78,43 @@ public class Solution {
 
     TreeNode prev = null;
 
+    /**
+     *
+     * 对于每个节点的逻辑：左子树通过检查 && 当前节点大于前继节点 && 右子树通过检查
+     * <ul>
+     *     <li>“当前节点大于前继节点”这个逻辑其实就是核心逻辑：前继节点肯定位于当前节点的左侧，
+     *     因为“helper(r.left)会把（前继节点的）左子树全部检查完”才有可能赋值前继节点</li>
+     *     <li>忠告：对于递归，你始终只站在当前节点的立场，不然你试图复现它的执行过程那是相当费脑的；当然作为程序员，你是应该时不时要在大脑中练习一下计算机的计算过程</li>
+     * </ul>
+     *
+     * @param r
+     * @return
+     */
     public boolean helper(TreeNode r) {
         if (r == null) return true;
 
+        System.out.println("r: " + r);
+        if (prev != null) System.out.println("prev: " + prev);
         if (!helper(r.left)) return false;
-        if (prev != null && r.val >= prev.val) return false;
+        if (prev != null && prev.val >= r.val) return false;
         prev = r;
 
-        return helper(r.right);
+        System.out.println("right check start for [" + r.val + "]");
+        boolean helper = helper(r.right);
+        System.out.println("check over for [" + r.val + "]" + " result: " + helper);
+        return helper;
     }
 
     public static void main(String[] args) {
+        TreeNode root = buildTree1();
+        System.out.println(new Solution().isValidBST2(root));
+
+        System.out.println(inorder(root));
+
+    }
+
+    @NotNull
+    private static TreeNode buildTree1() {
         TreeNode root = new TreeNode(5);
 
         TreeNode left = new TreeNode(1);
@@ -95,10 +123,37 @@ public class Solution {
         TreeNode right = new TreeNode(4);
         right.left = new TreeNode(3);
         right.right = new TreeNode(6);
+
         root.right = right;
+        return root;
+    }
 
-        System.out.println(inorder(root));
+    @NotNull
+    private static TreeNode buildTree2() {
+        TreeNode root = new TreeNode(5);
 
-        System.out.println(new Solution().isValidBST2(root));
+        TreeNode left = new TreeNode(2);
+        left.left = new TreeNode(1);
+        left.right = new TreeNode(3);
+        root.left = left;
+
+        TreeNode right = new TreeNode(6);
+        root.right = right;
+        return root;
+    }
+
+    @NotNull
+    private static TreeNode buildTree3() {
+        TreeNode root = new TreeNode(5);
+
+        TreeNode left = new TreeNode(1);
+        root.left = left;
+
+        TreeNode right = new TreeNode(7);
+        right.left = new TreeNode(6);
+        right.right = new TreeNode(8);
+
+        root.right = right;
+        return root;
     }
 }
