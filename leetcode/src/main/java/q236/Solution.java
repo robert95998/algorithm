@@ -37,17 +37,22 @@ import base.TreeNode;
 public class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         System.out.println(root != null ? root.val : root);
-        if (root == null || root.val == p.val || root.val == q.val) return root;
+        if (root == null || root.val == p.val || root.val == q.val) {
+//            System.out.println("return : " + (root != null ? root.val : root));
+            return root;
+        }
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-        return left == null ?
+        TreeNode treeNode = left == null ?
                 right
                 :
                 (right == null ? left : root);
+        System.out.println("output: [" + left + "," + right + "]" + treeNode);
+        return treeNode;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().lowestCommonAncestor(buildTree(), new TreeNode(7), new TreeNode(1)));
+        System.out.println(new Solution().lowestCommonAncestor(buildTree(), new TreeNode(6), new TreeNode(2)));
     }
 
     private static TreeNode buildTree() {
