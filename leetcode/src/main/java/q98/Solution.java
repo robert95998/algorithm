@@ -106,7 +106,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        TreeNode root = buildTree1();
+        TreeNode root = buildTree2();
         System.out.println(new Solution().isValidBST2(root));
 
         System.out.println(inorder(root));
