@@ -35,24 +35,26 @@ import base.TreeNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
+    /**
+     * 递归的实现
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         System.out.println(root != null ? root.val : root);
-        if (root == null || root.val == p.val || root.val == q.val) {
-//            System.out.println("return : " + (root != null ? root.val : root));
-            return root;
-        }
+        if (root == null || root.val == p.val || root.val == q.val) return root;
+
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-        TreeNode treeNode = left == null ?
-                right
-                :
-                (right == null ? left : root);
+        TreeNode treeNode = left == null ? right : (right == null ? left : root);
         System.out.println("output: [" + left + "," + right + "]" + treeNode);
         return treeNode;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().lowestCommonAncestor(buildTree(), new TreeNode(6), new TreeNode(2)));
+        System.out.println(new Solution().lowestCommonAncestor(buildTree(), new TreeNode(0), new TreeNode(8)));
     }
 
     private static TreeNode buildTree() {
