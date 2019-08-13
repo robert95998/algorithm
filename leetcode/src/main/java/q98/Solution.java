@@ -2,7 +2,6 @@ package q98;
 
 
 import base.TreeNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +112,6 @@ public class Solution {
 
     }
 
-    @NotNull
     private static TreeNode buildTree1() {
         TreeNode root = new TreeNode(5);
 
@@ -128,7 +126,6 @@ public class Solution {
         return root;
     }
 
-    @NotNull
     private static TreeNode buildTree2() {
         TreeNode root = new TreeNode(5);
 
@@ -142,7 +139,6 @@ public class Solution {
         return root;
     }
 
-    @NotNull
     private static TreeNode buildTree3() {
         TreeNode root = new TreeNode(5);
 

@@ -29,11 +29,35 @@ package q50;
 public class Solution {
 
     public double myPow(double x, int n) {
+        long m = n;
+        if (n < 0) {
+            x = 1 / x;
+            //当取最小值-2147483648时，取相反数会溢出
+            m = -m;
+        }
+        //x5次方可以拆分x1*x4；1、4在二进制里刚好就是2的0次方和2的2二次方；
+        double pow = 1;
+        while (m > 0) {
+            if ((m & 1) > 0) pow *= x;
+            x *= x;
+            m >>= 1;
+        }
+        return pow;
+    }
+
+    /**
+     * -1, -2147483648时为负数，有问题
+     * @param x
+     * @param n
+     * @return
+     */
+    public double myPow2(double x, int n) {
         if (n < 0) {
             x = 1 / x;
             //当取最小值-2147483648时，取相反数会溢出
             n = n == Integer.MIN_VALUE ? Integer.MAX_VALUE : -n;
         }
+        //x5次方可以拆分x1*x4；1、4在二进制里刚好就是2的0次方和2的2二次方；
         double pow = 1;
         while (n > 0) {
             System.out.println(n +" & 1 = " + (n & 1));
@@ -50,6 +74,6 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().myPow(2, -2147483648));
+        System.out.println(new Solution().myPow(2, 8));
     }
 }
