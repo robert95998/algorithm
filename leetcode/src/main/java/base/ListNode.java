@@ -15,4 +15,16 @@ public class ListNode {
                 ", next=" + next +
                 '}';
     }
+
+    public static ListNode initListNode() {
+        ListNode firstNode = new ListNode(1);
+
+        int count = firstNode.val;
+        ListNode cur = firstNode;
+        while (count < 7) {
+            cur.next = new ListNode(++count);
+            cur = cur.next;
+        }
+        return firstNode;
+    }
 }

@@ -90,8 +90,17 @@ public class Solution {
      * @return
      */
     public ListNode reverseListRecursive(ListNode head) {
-        // TODO: 2019/6/13
-        return null;
+        if (head == null || head.next == null) return head;
+
+        ListNode node = reverseListRecursive(head.next);
+        node.next = head;
+        return node;
+    }
+
+    public static void main(String[] args) {
+        ListNode node = ListNode.initListNode();
+        System.out.println(node);
+        System.out.println(new Solution().reverseListRecursive(node));
     }
 }
 
