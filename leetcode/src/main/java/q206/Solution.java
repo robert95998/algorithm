@@ -90,11 +90,24 @@ public class Solution {
      * @return
      */
     public ListNode reverseListRecursive(ListNode head) {
-        if (head == null || head.next == null) return head;
+        return reverse(head, null);
+    }
 
-        ListNode node = reverseListRecursive(head.next);
-        node.next = head;
-        return node;
+    public ListNode reverse(ListNode cur, ListNode pre) {
+        if (cur == null || cur.next == null) return cur;
+        //记住下一个节点，以便循环可以继续
+        ListNode last = cur.next;
+
+        //当前节点指向前继节点
+        cur.next = pre;
+        pre = cur;
+
+        //子链表反转后的末节点
+        last.next = cur;
+        //子链表反转后的头节点
+        ListNode head = reverse(last, pre);
+
+        return head;
     }
 
     public static void main(String[] args) {
