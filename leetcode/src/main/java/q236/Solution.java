@@ -35,8 +35,13 @@ import base.TreeNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
+    public static void main(String[] args) {
+        System.out.println(new Solution().lowestCommonAncestor(TreeNode.buildTree(), new TreeNode(0), new TreeNode(8)));
+    }
+
     /**
      * 递归的实现
+     *
      * @param root
      * @param p
      * @param q
@@ -51,16 +56,5 @@ public class Solution {
         TreeNode treeNode = left == null ? right : (right == null ? left : root);
         System.out.println("output: [" + left + "," + right + "]" + treeNode);
         return treeNode;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Solution().lowestCommonAncestor(buildTree(), new TreeNode(0), new TreeNode(8)));
-    }
-
-    private static TreeNode buildTree() {
-        TreeNode root = new TreeNode(3);
-        root.left = new TreeNode(5, new TreeNode(6), new TreeNode(2, 7, 4));
-        root.right = new TreeNode(1, new TreeNode(0), new TreeNode(8));
-        return root;
     }
 }

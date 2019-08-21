@@ -35,6 +35,34 @@ public class Solution {
     List<String> res = new ArrayList<>();
     int n;
 
+    public static void main(String[] args) {
+//        System.out.println(new Solution().generateParenthesis(2));
+        String str = "1234567890";
+        int segments = str.length() / 5;
+        for (int i = 0; i <= segments; i++) {
+            System.out.println("v: " + (
+
+                    i == segments ? str.substring(i * 5) : str.substring(i * 5, (i + 1) * 5)
+            ));
+        }
+
+        HashMap<String, String> map = new HashMap<String, String>() {{
+            this.put("1", "1");
+        }};
+        System.out.println(map.getOrDefault("2", "2323"));
+    }
+
+    private static void append1(StringBuilder candidate, int n, String str) {
+        int leftUsed = 0;
+        int rightUsed = 0;
+
+        if (leftUsed == n && rightUsed == n) return;
+        if (leftUsed < rightUsed) return;
+
+        if (leftUsed <= n) candidate.append(str);
+        if (rightUsed <= n) candidate.append(str);
+    }
+
     public List<String> generateParenthesis(int n) {
         this.n = n;
 
@@ -62,31 +90,5 @@ public class Solution {
         if (rightUsed < n && rightUsed < leftUsed) {
             _gen(leftUsed, rightUsed + 1, str + ")");
         }
-    }
-
-    public static void main(String[] args) {
-//        System.out.println(new Solution().generateParenthesis(2));
-        String str = "1234567890";
-        int segments = str.length() / 5;
-        for (int i = 0; i <= segments; i++) {
-            System.out.println("v: " + (
-
-                    i == segments ? str.substring(i * 5) : str.substring(i * 5, (i + 1) *5)
-                    ));
-        }
-
-        HashMap<String, String> map = new HashMap<String, String>(){{this.put("1", "1");}};
-        System.out.println(map.getOrDefault("2", "2323"));
-    }
-
-    private static void append1(StringBuilder candidate, int n, String str) {
-        int leftUsed = 0;
-        int rightUsed = 0;
-
-        if (leftUsed == n && rightUsed == n) return;
-        if (leftUsed < rightUsed) return;
-
-        if (leftUsed <= n) candidate.append(str);
-        if (rightUsed <= n) candidate.append(str);
     }
 }

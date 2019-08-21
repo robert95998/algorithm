@@ -19,12 +19,19 @@ import base.ListNode;
  */
 public class Solution {
 
+    static ListNode last(ListNode listNode) {
+        while (listNode.next != null) {
+            listNode = listNode.next;
+        }
+        return listNode;
+    }
+
     /**
      * <ul>
-     *     思想：
-     *     <li>重新构建一个新链表，用新链表跟踪结果</li>
-     *     <li>两个节点称为一对（pair），发现有pair存在则进行交换，每次循环移动两个位置；</li>
-     *     <li>边界情况的考虑：链表为奇数节点或偶数节点的情况，链表只有一个节点时</li>
+     * 思想：
+     * <li>重新构建一个新链表，用新链表跟踪结果</li>
+     * <li>两个节点称为一对（pair），发现有pair存在则进行交换，每次循环移动两个位置；</li>
+     * <li>边界情况的考虑：链表为奇数节点或偶数节点的情况，链表只有一个节点时</li>
      * </ul>
      *
      * @param head
@@ -34,8 +41,8 @@ public class Solution {
         ListNode newHead = null, pair;
         while (head != null) {
             // -> 业务实现
-            if(head.next == null){//奇数情况时
-                if(newHead == null){//链表只有一个节点时
+            if (head.next == null) {//奇数情况时
+                if (newHead == null) {//链表只有一个节点时
                     return head;
                 }
                 last(newHead).next = new ListNode(head.val);
@@ -56,19 +63,13 @@ public class Solution {
         return newHead;
     }
 
-    static ListNode last(ListNode listNode){
-        while (listNode.next != null){
-            listNode = listNode.next;
-        }
-        return  listNode;
-    }
-
     /**
      * <ul>思想：
-     *     <li>虚拟节点对原链表保持引用</li>
-     *     <li>将pair的1节点取出后重新插入支持</li>
-     *     <li>每一对pair（如果存在）的两个节点同时对后续节点进行引用，保持了两个起始位置不同的相同链表</li>
+     * <li>虚拟节点对原链表保持引用</li>
+     * <li>将pair的1节点取出后重新插入支持</li>
+     * <li>每一对pair（如果存在）的两个节点同时对后续节点进行引用，保持了两个起始位置不同的相同链表</li>
      * </ul>
+     *
      * @param head
      * @return
      */
@@ -76,7 +77,7 @@ public class Solution {
         ListNode p1 = new ListNode(0);//虚拟节点（因为头节点是要变动的，因为要交换嘛，所以搞个虚拟节点来指向原链表）
         p1.next = head;
         head = p1;//head等于最初的p1，这样保持对头节点的引用；head.next就是原链表
-        while(p1.next != null && p1.next.next != null){
+        while (p1.next != null && p1.next.next != null) {
             ListNode p = p1.next;//将1节点从链表里单独摘出来，记下来（可以视为临时链表）
             p1.next = p1.next.next;//将1节点（从原链表里）踢掉
             p.next = p1.next.next;//摘出来的临时链表1指向3
@@ -90,7 +91,7 @@ public class Solution {
     public ListNode swapPairs2(ListNode head) {
         ListNode temp = new ListNode(-1);
         temp.next = head;
-        while(head.next != null && head.next.next != null){
+        while (head.next != null && head.next.next != null) {
             ListNode node1 = head.next;
             ListNode node2 = head.next.next;
             node1.next = node2.next;

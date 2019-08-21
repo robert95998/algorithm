@@ -2,7 +2,6 @@ package q104;
 
 import base.TreeNode;
 
-import java.util.Deque;
 import java.util.LinkedList;
 
 /**
@@ -27,8 +26,13 @@ import java.util.LinkedList;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
+    public static void main(String[] args) {
+        System.out.println(new Solution().maxDepth2(TreeNode.buildTree()));
+    }
+
     /**
      * BFS实现
+     *
      * @param root
      * @return
      */
@@ -54,14 +58,11 @@ public class Solution {
 
     /**
      * 分治递归
+     *
      * @param root
      * @return
      */
     public int maxDepth2(TreeNode root) {
         return root == null ? 0 : 1 + Math.max(maxDepth2(root.left), maxDepth2(root.right));
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Solution().maxDepth2(TreeNode.buildTree()));
     }
 }

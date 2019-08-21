@@ -28,6 +28,12 @@ import base.ListNode;
  */
 public class Solution {
 
+    public static void main(String[] args) {
+        ListNode node = ListNode.initListNode();
+        System.out.println(node);
+        System.out.println("reversed: " + new Solution().reverseListRecursive(node));
+    }
+
     /**
      * 循环实现
      * <ul>
@@ -90,30 +96,21 @@ public class Solution {
      * @return
      */
     public ListNode reverseListRecursive(ListNode head) {
-        return reverse(head, null);
+        return reverse(head.next, head, head);
     }
 
-    public ListNode reverse(ListNode cur, ListNode pre) {
-        if (cur == null || cur.next == null) return cur;
-        //记住下一个节点，以便循环可以继续
-        ListNode last = cur.next;
+    public ListNode reverse(ListNode cur, ListNode head, ListNode pre) {
+        if (cur == null) {
+            return head;
+        }
+        ListNode next = cur.next;
 
-        //当前节点指向前继节点
-        cur.next = pre;
-        pre = cur;
+        //当前节点移到头部
+        pre.next = next;
+        cur.next = head;
 
-        //子链表反转后的末节点
-        last.next = cur;
         //子链表反转后的头节点
-        ListNode head = reverse(last, pre);
-
-        return head;
-    }
-
-    public static void main(String[] args) {
-        ListNode node = ListNode.initListNode();
-        System.out.println(node);
-        System.out.println(new Solution().reverseListRecursive(node));
+        return reverse(next, cur, pre);
     }
 }
 

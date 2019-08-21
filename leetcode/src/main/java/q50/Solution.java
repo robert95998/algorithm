@@ -28,6 +28,10 @@ package q50;
  */
 public class Solution {
 
+    public static void main(String[] args) {
+        System.out.println(new Solution().myPow(2, 8));
+    }
+
     public double myPow(double x, int n) {
         long m = n;
         if (n < 0) {
@@ -47,6 +51,7 @@ public class Solution {
 
     /**
      * -1, -2147483648时为负数，有问题
+     *
      * @param x
      * @param n
      * @return
@@ -60,7 +65,7 @@ public class Solution {
         //x5次方可以拆分x1*x4；1、4在二进制里刚好就是2的0次方和2的2二次方；
         double pow = 1;
         while (n > 0) {
-            System.out.println(n +" & 1 = " + (n & 1));
+            System.out.println(n + " & 1 = " + (n & 1));
             if ((n & 1) > 0) {
                 pow *= x;
             }
@@ -71,9 +76,5 @@ public class Solution {
             System.out.println("x:" + x + "/ pow:" + pow + "\n");
         }
         return pow;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Solution().myPow(2, 8));
     }
 }

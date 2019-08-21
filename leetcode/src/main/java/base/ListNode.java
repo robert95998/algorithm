@@ -8,14 +8,6 @@ public class ListNode {
         val = x;
     }
 
-    @Override
-    public String toString() {
-        return "ListNode{" +
-                "val=" + val +
-                ", next=" + next +
-                '}';
-    }
-
     public static ListNode initListNode() {
         ListNode firstNode = new ListNode(1);
 
@@ -26,5 +18,13 @@ public class ListNode {
             cur = cur.next;
         }
         return firstNode;
+    }
+
+    @Override
+    public String toString() {
+        return "ListNode{" +
+                "val=" + val +
+                ", next=" + next +
+                '}';
     }
 }

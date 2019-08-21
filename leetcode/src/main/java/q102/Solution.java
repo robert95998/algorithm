@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -43,6 +42,12 @@ import java.util.concurrent.ExecutionException;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
+
+    private List<List<Integer>> res = new ArrayList<>();
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        System.out.println(new Solution().levelOrder2(TreeNode.buildTree()));
+    }
 
     /**
      * BFS的做法
@@ -82,24 +87,21 @@ public class Solution {
      * @param root
      * @return
      */
-    /*public List<List<Integer>> levelOrder2(TreeNode root) {
-
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        if (root == null) return new ArrayList<>();
+        dfs(root, 0);
+        return res;
     }
 
-    public void dfs(TreeNode root){
-        if (root == null) return
-    }*/
+    public void dfs(TreeNode root, int level) {
+        if (root == null) return;
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-//        System.out.println(new Solution().levelOrder(buildTree()));
-        CompletableFuture<Boolean> f = CompletableFuture.completedFuture(true);
-        System.out.println(f.get());
-    }
+//        if (res.get(level) == null) res.add(level, new ArrayList<>());
+        if (res.size() < level + 1) res.add(new ArrayList<>());
+        List<Integer> l = res.get(level);
+        l.add(root.val);
 
-    private static TreeNode buildTree() {
-        TreeNode root = new TreeNode(3);
-        root.left = new TreeNode(5, new TreeNode(6), new TreeNode(2, 7, 4));
-        root.right = new TreeNode(1, new TreeNode(0), new TreeNode(8));
-        return root;
+        dfs(root.left, level + 1);
+        dfs(root.right, level + 1);
     }
 }

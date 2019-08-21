@@ -33,6 +33,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Solution {
 
+    public static void main(String[] args) {
+        int[] nums = {6, 5, 5};
+        System.out.println(new Solution().majorityElement(nums));
+        List<Object> list = Collections.singletonList(null);
+        System.out.println(list);
+    }
+
     public int majorityElement(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
@@ -44,6 +51,7 @@ public class Solution {
 
     /**
      * 力扣不允许使用AtomicInteger，直接报编译错误
+     *
      * @param nums
      * @return
      */
@@ -58,7 +66,7 @@ public class Solution {
     /**
      * 从力扣上摘的，耗时2ms；关键是简洁，代码很取巧
      * <ul>
-     *     <li>一个占了一半以上的数字，最中间那个位置一定有它</li>
+     * <li>一个占了一半以上的数字，最中间那个位置一定有它</li>
      * </ul>
      *
      * @param nums
@@ -67,12 +75,5 @@ public class Solution {
     public int majorityElement3(int[] nums) {
         Arrays.sort(nums);
         return nums[nums.length / 2];
-    }
-
-    public static void main(String[] args) {
-        int[] nums = {6, 5, 5};
-        System.out.println(new Solution().majorityElement(nums));
-        List<Object> list = Collections.singletonList(null);
-        System.out.println(list);
     }
 }

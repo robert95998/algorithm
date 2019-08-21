@@ -25,8 +25,13 @@ import base.TreeNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
+    public static void main(String[] args) {
+        System.out.println(new Solution().minDepth(TreeNode.buildTree()));
+    }
+
     /**
      * 递归实现
+     *
      * @param root
      * @return
      */
@@ -35,9 +40,5 @@ public class Solution {
         int left = minDepth(root.left);
         int right = minDepth(root.right);
         return 1 + ((left == 0 || right == 0) ? Math.max(left, right) : Math.min(left, right));
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Solution().minDepth(TreeNode.buildTree()));
     }
 }
