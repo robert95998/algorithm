@@ -22,13 +22,13 @@ public class TreeNode {
     }
 
     /**
-     * 3
-     * /       \
-     * 5        1
+     *       3
+     *   /       \
+     *   5        1
      * /  \      /  \
      * 6   2    0    8
-     * / \
-     * 7   4
+     *    / \
+     *   7   4
      */
     public static TreeNode buildTree() {
         TreeNode root = new TreeNode(3);
